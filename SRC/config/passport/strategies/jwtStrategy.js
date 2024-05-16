@@ -1,5 +1,6 @@
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import {userModel} from '../../../models/users.js'
+import config_vars from "../../../dotenv.js";
 
 const cookieExtractor = req => {
     // Busca si tengo cookies en la solicitud HTTP, y si tengo, token tomará el valor de la cookie
@@ -14,7 +15,7 @@ const jwtOptions = {
     // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // Anulada por ahora ya que no usaré un browser, sino PostMan
     jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
     // Clave para comparar si las cookies que fueron enviadas están firmadas con esta contraseña
-    secretOrKey: "coderhouse"
+    secretOrKey: config_vars.jwt_secret
 }
 
 // Payload tendrá toda la información decodificada del token

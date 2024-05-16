@@ -1,4 +1,5 @@
 import express from 'express'
+import config_vars from './dotenv.js'
 import mongoose from 'mongoose'
 import __dirname from './path.js'
 import { engine } from 'express-handlebars'
@@ -11,21 +12,22 @@ import initializatePassport from './config/passport/passport.js'
 import GitHubStrategy from 'passport-github2'
 
 const my_app = express ()
-const PORT = 8080
+
+const PORT = config_vars.port
 
 // Conexión con DB
-mongoose.connect("mongodb+srv://lezamaj:indexport.2011@cluster0.r9uoba0.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Desafio6")
+mongoose.connect(config_vars.mongo_db_url)
     .then(() => console.log("Conectado a la DB!"))
     .catch(error => console.log("Error al conectarse a la DB: ", error))
 
 // Middlewares
 my_app.use(express.json())
-my_app.use(cookieParser("Clave Secreta"))
+my_app.use(cookieParser(config_vars.cookies_secret))
 my_app.use(session({
-    secret: 'ClaveSecreta',
+    secret: config_vars.session_secret,
     resave: true,
     store: MongoStore.create({
-        mongoUrl: "mongodb+srv://lezamaj:indexport.2011@cluster0.r9uoba0.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Desafio6",
+        mongoUrl: config_vars.mongo_db_url,
         ttl: 2*60*60 // 2 Horas
     }),
     saveUninitialized: true

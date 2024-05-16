@@ -1,11 +1,12 @@
 import jwt from 'jsonwebtoken'
+import config_vars from '../dotenv.js'
 
 // Función que recibe a un objeto usuario, y devuelve un Token encriptado con la
 // contraseña indicada, y que expira en el tiempo indicado
 
 const generateToken = (user) => {
 
-    const privateKey = 'coderhouse'
+    const privateKey = config_vars.jwt_secret
     const expiracyTime = '12h'
 
     // Recibe: El contenido que recibirá el token, en nuestro caso un usuario, la clave privada y el tiempo de expiración
