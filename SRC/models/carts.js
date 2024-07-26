@@ -23,5 +23,17 @@ const cartSchema = new Schema ({
     }
 })
 
+cartSchema.pre("find", async function (next) {
+    
+    try {
+        this.populate('products.id_prod'),
+        next()
+    }
+
+    catch (error) {
+        //
+    }
+})
+
 // Exporto este prototipo en mi colección
 export const cartModel = model ("carts", cartSchema)
