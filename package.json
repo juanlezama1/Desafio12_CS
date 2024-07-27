@@ -22,14 +22,14 @@
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0"
   },
-  "name": "desafio11",
+  "name": "desafio12",
   "version": "1.0.0",
   "main": "./SRC/app.js",
   "author": "Juan Pablo Lezama",
   "license": "ISC",
-  "description": "Desafío 11 - Curso BackEnd - CoderHouse",
+  "description": "Desafío 12 - Curso BackEnd - CoderHouse",
   "repository": {
     "type": "git",
-    "url": "https://github.com/juanlezama1/Desafio11_CS.git"
+    "url": "https://github.com/juanlezama1/Desafio12_CS"
   }
 }

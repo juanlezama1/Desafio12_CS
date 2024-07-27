@@ -10,7 +10,7 @@ import MongoStore from 'connect-mongo'
 import passport from 'passport'
 import initializatePassport from './config/passport/passport.js'
 import GitHubStrategy from 'passport-github2'
-import { orderModel } from './models/orders.js'
+import { ticketModel } from './models/tickets.js'
 
 const my_app = express ()
 
@@ -267,29 +267,16 @@ const my_server = my_app.listen(PORT, () => {
 // .catch(() => console.log("Error al cargar la DB con los usuarios!"))
 
 
-// 4) Código que carga la DB con las órdenes de compra:
-
-// const cargar_db4 = async () => {
-//     await orderModel.insertMany([
-//         {
-//             "cart": "662435c16fc64657d2c4bf4b",
-//             "user": "662a6f878a092fe4b2238765"
-//         },
-//         {
-//             "cart": "662435c16fc64657d2c4bf4f",
-//             "user": "662a6f878a092fe4b2238767"
-//         },
-//         {
-//             "cart": "662435c16fc64657d2c4bf53",
-//             "user": "662a6f878a092fe4b2238766"
-//         },
-//         {
-//             "cart": "6641713ca60dd442e95e72ed",
-//             "user": "662a6f878a092fe4b2238768"
-//         }
-//     ])
-// }
-
-// cargar_db4()
-// .then(() => console.log("Cargada la DB con las órdenes de compra!"))
-// .catch((error) => console.log("Error al cargar la DB con las órdenes de compra!", error))
+// const nuevoTicket = new ticketModel({
+//     amount: 855,
+//     cart: "662435c16fc64657d2c4bf4b",
+//     user: "662a6f878a092fe4b2238767"
+//   });
+  
+//   nuevoTicket.save()
+//     .then((ticket) => {
+//       console.log('Ticket guardado:', ticket);
+//     })
+//     .catch((error) => {
+//       console.error('Error al guardar el ticket:', error);
+//     });

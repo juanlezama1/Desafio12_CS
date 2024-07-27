@@ -25,4 +25,9 @@ const getUserStatus = async (req) => {
     }
 }
 
-export {getUserName, getUserStatus}
+const getUserIdByEmail = async (email) => {
+    const user_id = await userModel.findOne({email})
+    return user_id._id
+}
+
+export {getUserName, getUserStatus, getUserIdByEmail}

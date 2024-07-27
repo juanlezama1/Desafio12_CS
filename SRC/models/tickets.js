@@ -1,8 +1,26 @@
 import {Schema, model} from "mongoose"
+import crypto from 'crypto'
 
 // Prototipo de una Orden de Compra (OC) en la DB
 
-const orderSchema = new Schema ({
+const ticketSchema = new Schema ({
+
+    code: {
+        type: String,
+        required: true,
+        default: crypto.randomUUID()
+    },
+
+    purchase_datetime: {
+        type: Date,
+        required: true,
+        default: Date.now()
+    },
+
+    amount: {
+        type: Number,
+        required: true
+    },
 
     cart: {
         type: Schema.Types.ObjectId,
@@ -17,11 +35,11 @@ const orderSchema = new Schema ({
     },
 })
 
-orderSchema.pre('save', () => {
+ticketSchema.pre('save', () => {
     console.log("Guardaste una orden de compra!")
 })
 
-orderSchema.pre('find', async function(next){
+ticketSchema.pre('find', async function(next){
 
     try {
         this.populate('cart')
@@ -35,4 +53,4 @@ orderSchema.pre('find', async function(next){
 })
 
 // Exporto este prototipo en mi colección
-export const orderModel = model ("orders", orderSchema)
+export const ticketModel = model ("tickets", ticketSchema)

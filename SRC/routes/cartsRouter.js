@@ -1,5 +1,7 @@
 import { Router } from "express"
 import { cartModel } from "../models/carts.js"
+import cartCheckout from "../controllers/cartController.js"
+
 
 const cartsRouter = Router ()
 
@@ -20,6 +22,33 @@ cartsRouter.get('/:cid', async (req, res) => {
         res.status(400).render('templates/error', {error_description: "El carrito no existe!"})
     }
 })
+
+// FINALIZA LA COMPRA DE UN CARRITO
+
+cartsRouter.get('/:cid/purchase', async (req, res) => {
+
+    let cart_code = req.params.cid // Obtengo el código del carrito
+
+    if (!req.session.user)
+    
+    {
+        res.status(400).send("Imposible confirmar compra sin login activo!")
+        return
+    }
+
+    try {
+
+        const checkout_status = await cartCheckout(cart_code, req.session.user.email)
+        checkout_status? res.status(201).send('Orden de compra generada con éxito!'):res.status(400).send('Imposible generar orden de compra, stock insuficiente')
+    }
+
+    catch (error)
+
+    {
+        console.log("Error al generar el carrito: ", error)
+    }
+})
+
 
 // UPDATE DE UN CARRITO ESPECÍFICO
 cartsRouter.put('/:cid', async (req, res) => {

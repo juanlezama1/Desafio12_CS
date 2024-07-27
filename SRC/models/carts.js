@@ -23,7 +23,8 @@ const cartSchema = new Schema ({
     }
 })
 
-cartSchema.pre("find", async function (next) {
+// Aplica tanto para el find como para el findById
+cartSchema.pre(/^find/, async function (next) {
     
     try {
         this.populate('products.id_prod'),
